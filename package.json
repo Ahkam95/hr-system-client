@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "sync": "aws s3 --region 'ap-south-1' sync ./dist/* 's3://hrms-test1/'",
+    "sync": "aws s3 --region ap-south-1 sync ./build s3://hrms-test1/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
