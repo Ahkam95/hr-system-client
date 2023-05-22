@@ -10,7 +10,7 @@ const EmployeeDetail = () => {
         axios.get('http://localhost:8081/get/'+id)
         .then(res => setEmployee(res.data.Result[0]))
         .catch(err => console.log(err));
-    })
+    }, [])
     const handleLogout = () => {
 		axios.get('http://localhost:8081/logout')
 		.then(res => {
