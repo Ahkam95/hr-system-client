@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './style.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import {API_URL} from '../config/config'
+import Cookies from 'js-cookie'
 
 const Login = () => {
 
@@ -13,17 +15,19 @@ const Login = () => {
     axios.defaults.withCredentials = true;
     const [error, setError] = useState('')
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        axios.post('http://localhost:8081/login', values)
-        .then(res => {
+        try {
+            const res = await axios.post(`${API_URL}/login`, values)
             if(res.data.Status === 'Success') {
+                await Cookies.set('token', res.data.token)
                 navigate('/');
             } else {
                 setError(res.data.Error);
             }
-        })
-        .catch(err => console.log(err));
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (

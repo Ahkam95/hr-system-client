@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import {API_URL} from '../config/config'
 
 const EditEmployee = () => {
 	const [data, setData] = useState({
@@ -14,7 +15,7 @@ const EditEmployee = () => {
 	const {id} = useParams();
 
 	useEffect(()=> {
-		axios.get('http://localhost:8081/get/'+id)
+		axios.get(`${API_URL}/get/`+id)
 		.then(res => {
 			setData({...data, name: res.data.Result[0].name,
 				email: res.data.Result[0].email,
@@ -27,7 +28,7 @@ const EditEmployee = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		axios.put('http://localhost:8081/update/'+id, data)
+		axios.put(`${API_URL}/update/`+id, data)
 		.then(res => {
 			if(res.data.Status === "Success") {
 				navigate('/employee')

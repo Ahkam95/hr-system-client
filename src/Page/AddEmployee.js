@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import {API_URL} from '../config/config'
 
 const AddEmployee = () => {
 	const [data, setData] = useState({
@@ -22,7 +23,7 @@ const AddEmployee = () => {
 		formdata.append("address", data.address);
 		formdata.append("salary", data.salary);
 		formdata.append("image", data.image);
-		axios.post('http://localhost:8081/create', formdata)
+		axios.post(`${API_URL}/create`, formdata)
 		.then(res => {
 			navigate('/employee')
 		})

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import {API_URL} from '../config/config'
 
 function Home() {
   const [adminCount, setAdminCount] = useState()
@@ -7,17 +8,17 @@ function Home() {
   const [salary, setSalary] = useState()
 
   useEffect(() => {
-    axios.get('http://localhost:8081/adminCount')
+    axios.get(`${API_URL}/adminCount`)
 		.then(res => {
 			setAdminCount(res.data[0].admin)
 		}).catch(err => console.log(err));
 
-    axios.get('http://localhost:8081/employeeCount')
+    axios.get(`${API_URL}/employeeCount`)
 		.then(res => {
 			setEmployeeCount(res.data[0].employee)
 		}).catch(err => console.log(err));
 
-    axios.get('http://localhost:8081/salary')
+    axios.get(`${API_URL}/salary`)
 		.then(res => {
 			setSalary(res.data[0].sumOfSalary)
 		}).catch(err => console.log(err));

@@ -2,12 +2,16 @@ import React, { useEffect } from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Cookies from 'js-cookie'
+import {API_URL} from '../config/config'
 
 const Dashboard = () => {
 	const navigate = useNavigate()
 	axios.defaults.withCredentials = true;
-	useEffect(()=>{
-		axios.get('http://localhost:8081/dashboard')
+	useEffect(async ()=>{
+		axios.get(`${API_URL}/dashboard`, {headers: {
+			token: await Cookies.get('token')
+		}})
 		.then(res => {
 			if(res.data.Status === "Success") {
 				if(res.data.role === "admin") {
@@ -23,7 +27,7 @@ const Dashboard = () => {
 	}, [])
 
 	const handleLogout = () => {
-		axios.get('http://localhost:8081/logout')
+		axios.get(`${API_URL}/logout`)
 		.then(res => {
 			navigate('/start')
 		}).catch(err => console.log(err));

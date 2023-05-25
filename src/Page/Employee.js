@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import {API_URL} from '../config/config'
 
 function Employee() {
   const [data, setData] = useState([])
 
   useEffect(()=> {
-    axios.get('http://localhost:8081/getEmployee')
+    axios.get(`${API_URL}/getEmployee`)
     .then(res => {
       if(res.data.Status === "Success") {
         setData(res.data.Result);
@@ -18,7 +19,7 @@ function Employee() {
   }, [])
 
   const handleDelete = (id) => {
-    axios.delete('http://localhost:8081/delete/'+id)
+    axios.delete(`${API_URL}/delete/`+id)
     .then(res => {
       if(res.data.Status === "Success") {
         window.location.reload(true);
@@ -52,7 +53,7 @@ function Employee() {
               return <tr key={index}>
                   <td>{employee.name}</td>
                   <td>{
-                    <img src={`http://localhost:8081/images/`+employee.image} alt="" className='employee_image'/>
+                    <img src={`${API_URL}/images/`+employee.image} alt="" className='employee_image'/>
                     }</td>
                   <td>{employee.email}</td>
                   <td>{employee.address}</td>
