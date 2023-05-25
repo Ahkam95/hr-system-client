@@ -30,6 +30,7 @@ const Dashboard = () => {
 		axios.get(`${API_URL}/logout`)
 		.then(res => {
 			navigate('/start')
+			Cookies.remove('token')
 		}).catch(err => console.log(err));
 	}
 	return (

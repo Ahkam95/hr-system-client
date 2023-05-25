@@ -19,6 +19,7 @@ function Employee() {
   }, [])
 
   const handleDelete = (id) => {
+    console.log(`${API_URL}/delete/`+id);
     axios.delete(`${API_URL}/delete/`+id)
     .then(res => {
       if(res.data.Status === "Success") {
