@@ -12,6 +12,11 @@ Cloud based Human Resource Management System
 npm install
 npm start
 ```
+2. Login as a Default Admin
+```bash
+UserName: hrms-admin@gmail.com
+Password: zxcv
+```
 
 ## To deploy the Client to AWS
 

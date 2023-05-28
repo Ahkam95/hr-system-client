@@ -42,7 +42,6 @@ function Employee() {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Image</th>
               <th>Email</th>
               <th>Address</th>
               <th>Salary</th>
@@ -53,9 +52,6 @@ function Employee() {
             {data.map((employee, index) => {
               return <tr key={index}>
                   <td>{employee.name}</td>
-                  <td>{
-                    <img src={`${API_URL}/images/`+employee.image} alt="" className='employee_image'/>
-                    }</td>
                   <td>{employee.email}</td>
                   <td>{employee.address}</td>
                   <td>{employee.salary}</td>

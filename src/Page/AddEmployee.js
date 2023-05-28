@@ -9,21 +9,20 @@ const AddEmployee = () => {
 		email: '',
 		password: '',
 		address: '',
-		salary: '',
-		image: ''
+		salary: ''
 	})
 	const navigate = useNavigate()
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const formdata = new FormData();
-		formdata.append("name", data.name);
-		formdata.append("email", data.email);
-		formdata.append("password", data.password);
-		formdata.append("address", data.address);
-		formdata.append("salary", data.salary);
-		formdata.append("image", data.image);
-		axios.post(`${API_URL}/create`, formdata)
+		const body = {
+			name: data.name,
+			email: data.email,
+			password: data.password,
+			address: data.address,
+			salary: data.salary
+		}
+		axios.post(`${API_URL}/create`, body)
 		.then(res => {
 			navigate('/employee')
 		})
@@ -57,13 +56,6 @@ const AddEmployee = () => {
 					<label for="inputAddress" class="form-label">Address</label>
 					<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" autoComplete='off'
 					onChange={e => setData({...data, address: e.target.value})}/>
-				</div>
-				<div class="col-12 mb-3">
-					<label class="form-label" for="inputGroupFile01">Select Image</label>
-					<input type="file" class="form-control" id="inputGroupFile01"
-					onChange={e => {
-						console.log(e.target.files)
-						setData({...data, image: e.target.files[0]})}}/>
 				</div>
 				<div class="col-12">
 					<button type="submit" class="btn btn-primary">Create</button>

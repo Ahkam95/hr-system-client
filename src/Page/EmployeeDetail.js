@@ -30,7 +30,7 @@ const EmployeeDetail = () => {
   return (
     <div>
         <div className='d-flex justify-content-center flex-column align-items-center mt-3'>
-            <img src={`${API_URL}/images/`+employee.image} alt="" className='empImg'/>
+            <img src={'/Images/user.jpg'} alt="" className='empImg'/>
             <div className='d-flex align-items-center flex-column mt-5'>
                 <h3>Name: {employee.name}</h3>
                 <h3>Email: {employee.email}</h3>
