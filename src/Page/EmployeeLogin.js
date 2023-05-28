@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import {API_URL} from '../config/config'
 
@@ -15,18 +16,20 @@ const EmployeeLogin = () => {
     axios.defaults.withCredentials = true;
     const [error, setError] = useState('')
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        axios.post(`${API_URL}/employeelogin`, values)
-        .then(res => {
+        try {
+            const res = await axios.post(`${API_URL}/employeelogin`, values);
             if(res.data.Status === 'Success') {
                 const id = res.data.id;
+                await Cookies.set('token', res.data.token)
                 navigate('/employeedetail/'+id);
             } else {
                 setError(res.data.Error);
             }
-        })
-        .catch(err => console.log(err));
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (

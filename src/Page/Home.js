@@ -3,14 +3,15 @@ import React, { useEffect, useState } from 'react'
 import {API_URL} from '../config/config'
 
 function Home() {
-  const [adminCount, setAdminCount] = useState()
+  const [adminDetails, setAdminDetails] = useState([])
   const [employeeCount, setEmployeeCount] = useState()
   const [salary, setSalary] = useState()
 
+
   useEffect(() => {
-    axios.get(`${API_URL}/adminCount`)
+    axios.get(`${API_URL}/adminDetails`)
 		.then(res => {
-			setAdminCount(res.data[0].admin)
+			setAdminDetails(res.data)
 		}).catch(err => console.log(err));
 
     axios.get(`${API_URL}/employeeCount`)
@@ -33,7 +34,7 @@ function Home() {
           </div>
           <hr />
           <div className=''>
-            <h5>Total: {adminCount}</h5>
+            <h5>Total: {adminDetails.length}</h5>
           </div>
         </div>
         <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
@@ -47,7 +48,7 @@ function Home() {
         </div>
         <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
           <div className='text-center pb-1'>
-            <h4>Salary</h4>
+            <h4>Employees Salary</h4>
           </div>
           <hr />
           <div className=''>
@@ -56,24 +57,25 @@ function Home() {
         </div>
       </div>
 
-      {/* List of admin  */}
       <div className='mt-4 px-5 pt-3'>
-        <h3>List of Admins</h3>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Admin</td>
-              <td>Admin</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <h3>List of Admins</h3>
+          <table className='table'>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {adminDetails.map((adminData) => {
+                return <tr>
+                  <td>{adminData.email}</td>
+                  <td> <a href="#" title="This feature is not implemented yet">Edit</a></td>
+                </tr>
+              })}
+            </tbody>
+          </table>
+        </div>
     </div>
   )
 }
