@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import Cookies from 'js-cookie'
 import {API_URL} from '../config/config'
 
 const EditEmployee = () => {
@@ -14,8 +15,10 @@ const EditEmployee = () => {
 	
 	const {id} = useParams();
 
-	useEffect(()=> {
-		axios.get(`${API_URL}/get/`+id)
+	useEffect(async ()=> {
+		axios.get(`${API_URL}/get/`+id, {headers: {
+			token: await Cookies.get('token')
+		}})
 		.then(res => {
 			setData({...data, name: res.data.Result[0].name,
 				email: res.data.Result[0].email,
