@@ -24,7 +24,7 @@ Password: zxcv
 ```bash
 aws configure
 ```
-pass the Security Credential of the AWS account
+pass the Security Credential of the AWS account in your terminal
 
 2. Deploy
 ```bash
